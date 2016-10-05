@@ -23,7 +23,15 @@ class Sql(object):
 			   fun.msg("exec" + str(sql) + "error",1)
 			   return None
 		return cursor.fetchall()
-
+	def getStringResult(self,sql=""):
+		string = self.exec(sql)
+		lst = []
+		for j in string:
+			tmp = []
+			for i in j:
+				tmp.append(str(i))
+			lst.append("".join(tmp))
+		return lst
 if __name__ == '__main__':
 	s = Sql("127.0.0.1","root","","oj")
-	print(s.exec("select * from oj_contest"))
+	print(s.getStringResult("select * from oj_contest"))
