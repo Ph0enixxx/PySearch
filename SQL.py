@@ -4,11 +4,11 @@ import sys
 import io
 if __name__ == '__main__':
 	sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
-
+	import Cut
 class Sql(object):
 	def __init__(self,host,usernamep,password,db):
 		try:
-			self.db = pymysql.connect(host,usernamep,password,db)
+			self.db = pymysql.connect(host,usernamep,password,db,charset='utf8')
 		except:
 			fun.msg("db connect error",1)
 			sys.exit(1)
@@ -30,8 +30,10 @@ class Sql(object):
 			tmp = []
 			for i in j:
 				tmp.append(str(i))
-			lst.append("".join(tmp))
+			lst.append(" ".join(tmp))
 		return lst
 if __name__ == '__main__':
 	s = Sql("127.0.0.1","root","","oj")
 	print(s.getStringResult("select * from oj_contest"))
+	for i in s.getStringResult("select * from oj_contest"):
+		print(Cut.go(i))
