@@ -30,10 +30,11 @@ class Sql(object):
 			tmp = []
 			for i in j:
 				tmp.append(str(i))
-			lst.append(" ".join(tmp))
+			lst.append((j[0]," ".join(tmp)))
 		return lst
 if __name__ == '__main__':
 	s = Sql("127.0.0.1","root","","oj")
 	print(s.getStringResult("select * from oj_contest"))
 	for i in s.getStringResult("select * from oj_contest"):
-		print(Cut.go(i))
+		p = Cut.go(i[1])
+		print(p)
