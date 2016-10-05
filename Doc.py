@@ -43,6 +43,7 @@ class Doc(object):
 					else:
 						js = list(self.data.json_decode(js))
 						js.append(num)
+						js = list(set(js))
 						numx = self.data.json_encode(js)
 						self.data.set(x,numx)
 		#分词
