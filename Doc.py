@@ -2,8 +2,13 @@ import sys
 import io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 import time
-import jieba
+####################
+import Cut
 from Data import Data
+####################
+
+#不同的词后面加上不同的题号即可
+
 class Doc(object):
 	def save(self,doc=""):
 		#分词
@@ -13,3 +18,4 @@ class Doc(object):
 		#分词
 		#获取每个数据
 		pass
+
