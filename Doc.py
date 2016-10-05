@@ -53,6 +53,13 @@ class Doc(object):
 	def get(self,key="",page=1,size=0):
 		#分词
 		#获取每个数据
+		if key == "":
+			return None ##None好还是""好
+		lst = self.data.get(key)
+		if size == 0:
+			return lst
+		else:
+			return lst[(page-1)*size:page*size]
 		pass
 	def getData(self):
 		s = Sql("127.0.0.1","root","","oj")
@@ -64,4 +71,5 @@ class Doc(object):
 			fun.msg("获取数据失败",1)
 if __name__ == '__main__':
 	a = Doc()
-	a.save(a.getData())
+	#a.save(a.getData())
+	print(a.get("的"))
