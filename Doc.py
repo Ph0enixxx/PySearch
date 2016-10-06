@@ -65,8 +65,9 @@ class Doc(object):
 		words = Cut.go(key)
 		print(words)
 		for i in words:
-			print(type(self.data.get(i)))
-			lst.append(self.data.get(i))
+			print(type(self.data.json_decode(self.data.get(i))))
+			lst.extend(self.data.json_decode(self.data.get(i)))
+			lst = list(set(lst))
 		if size == 0:
 			return lst
 		else:
