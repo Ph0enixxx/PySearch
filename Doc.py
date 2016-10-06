@@ -63,15 +63,15 @@ class Doc(object):
 			return None ##None好还是""好
 		lst = []
 		words = Cut.go(key)
-		print(words)
+		#print(words)
 		for i in words:
-			print(type(self.data.json_decode(self.data.get(i))))
+			#print(type(self.data.json_decode(self.data.get(i))))
 			lst.extend(self.data.json_decode(self.data.get(i)))
 			lst = list(set(lst))
 		if size == 0:
-			return lst
+			return self.data.json_encode(lst)
 		else:
-			return lst[(page-1)*size:page*size]
+			return self.data.json_encode(lst[(page-1)*size:page*size])
 		pass
 	def getData(self):
 		s = Sql("127.0.0.1","root","","oj")
@@ -84,4 +84,4 @@ class Doc(object):
 if __name__ == '__main__':
 	a = Doc()
 	#a.save(a.getData())
-	print(a.get("A+b"))
+	print(a.get("了"))
