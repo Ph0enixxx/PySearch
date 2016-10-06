@@ -13,6 +13,7 @@ import fun
 #不同的词后面加上不同的题号即可
 
 class Doc(object):
+	__slots__ = ('data')
 	def __init__(self):
 		self.data = Data()
 	def save(self,doc=""):
@@ -35,7 +36,7 @@ class Doc(object):
 					js = self.data.get(x)
 					fun.msg(js,2)
 					if js == None:
-						l = [num]
+						l = [num,]
 						fun.msg(l,2)
 						numx = self.data.json_encode(l)
 						fun.msg(numx)
@@ -43,7 +44,8 @@ class Doc(object):
 					else:
 						js = list(self.data.json_decode(js))
 						js.append(num)
-						js = list(set(js))
+						if len(js) >1:
+							js = list(set(js))
 						numx = self.data.json_encode(js)
 						self.data.set(x,numx)
 		#分词
@@ -54,9 +56,17 @@ class Doc(object):
 	def get(self,key="",page=1,size=0):
 		#分词
 		#获取每个数据
+
+		##分词找并集
+
 		if key == "":
 			return None ##None好还是""好
-		lst = self.data.get(key)
+		lst = []
+		words = Cut.go(key)
+		print(words)
+		for i in words:
+			print(type(self.data.get(i)))
+			lst.append(self.data.get(i))
 		if size == 0:
 			return lst
 		else:
@@ -73,4 +83,4 @@ class Doc(object):
 if __name__ == '__main__':
 	a = Doc()
 	#a.save(a.getData())
-	print(a.get("的"))
+	print(a.get("A+b"))
