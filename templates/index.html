@@ -1,24 +1,42 @@
 <head>
-<meta charset="utf-8">
-<script src="http://cdn.static.runoob.com/libs/angular.js/1.4.6/angular.min.js"></script>
+	<meta charset="utf-8">
+	<script src="static/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="static/amazeui.min.css">
 </head>
+<div class="am-projects" style="background:#444;height:40px">
+	<div class="amz-container am-cf">
+		<h1 style="color:white;padding: 4px;">题目查询</h1>
+	</div>
+</div>
 <div ng-app="myApp" ng-controller="customersCtrl"> 
-<input id="keyword"/><button ng-click="clickk()">Search</button>
-<ul>
-  <li ng-repeat="x in names">
-  {{ code }}
-  </li>
-</ul>
+	<div style="padding-left: 10px;margin-left: auto;margin-right: auto;width:95%">
+		<div class="am-form-group" style="padding-left: 10%;margin-left: auto;margin-right: auto;">
+			<input type="text" class=""  placeholder="输入关键词" id="keyword" style="width:70%;height:37px;float:left"><button ng-click="clickk()" style="height:37px;float:left" class="am-btn am-btn-secondary ">Search</button>
+		</div>
+	</div>
+
+		<br><br>
+	<div  style="padding-left: 10px">
+		<ul>
+			<li ng-model="tips">{{tips}}</li>
+			<li ng-repeat="x in names">
+				<a href="{{ code }}">{{ code }}</a>
+			</li>
+		</ul>
+	</div>
 </div>
 <script>
-var app = angular.module('myApp', []);
-app.controller('customersCtrl', function($scope, $http){
-	$http.get("/key/a+b").success(function (response) {$scope.names = response;});
+	var app = angular.module('myApp', []);
+	app.controller('customersCtrl', function($scope, $http){
+	//$http.get("/key/a+b").success(function (response) {$scope.names = response;});
+	$scope.names = [];
+	$scope.tips = "2333";
 
 	$scope.clickk = function() {
-			var keyword = document.getElementById('keyword').value;
-			console.log(keyword);
-			$http.get("/key/" + keyword).success(function (response) {$scope.names = response;});
-		}
+		$scope.tips = "找到以下结果：";
+		var keyword = document.getElementById('keyword').value;
+		console.log(keyword);
+		$http.get("/key/" + keyword).success(function (response) {$scope.names = response;});
+	}
 });
 </script>
