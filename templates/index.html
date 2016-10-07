@@ -17,10 +17,10 @@
 
 		<br><br>
 	<div  style="padding-left: 10px">
-		<ul>
-			<li ng-model="tips">{{tips}}</li>
+		<ul class="am-list">
+			{{tips}}
 			<li ng-repeat="x in names">
-				<a href="{{ code }}">{{ code }}</a>
+				<a href="http://202.194.119.110/problem.php?id={{ code }}">{{ code }}</a>
 			</li>
 		</ul>
 	</div>
@@ -30,7 +30,7 @@
 	app.controller('customersCtrl', function($scope, $http){
 	//$http.get("/key/a+b").success(function (response) {$scope.names = response;});
 	$scope.names = [];
-	$scope.tips = "2333";
+	$scope.tips = "";
 
 	$scope.clickk = function() {
 		$scope.tips = "找到以下结果：";
