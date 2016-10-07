@@ -66,10 +66,17 @@ class Doc(object):
 		#print(words)
 		for i in words:
 			#print(type(self.data.json_decode(self.data.get(i))))
-			lst.extend(self.data.json_decode(self.data.get(i)))
-			lst = list(set(lst))
+			try:
+				lst.extend(self.data.json_decode(self.data.get(i)))
+			except:
+				pass
+		lst = list(set(lst))
 		if size == 0:
-			return self.data.json_encode(lst)
+			try:
+				return self.data.json_encode(lst)
+			except:
+				return self.data.json_encode([])
+		##分页功能未测试！
 		else:
 			return self.data.json_encode(lst[(page-1)*size:page*size])
 		pass
