@@ -1,6 +1,5 @@
-debug = True
 def msg(msg,t=0):
-	if debug == False:
+	if conf.DEBUG == False:
 		return
 	_type = ['[OK]','[ERR]','[INFO]']
 	try:

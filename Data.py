@@ -1,4 +1,5 @@
 import redis
+import conf
 if __name__ == '__main__':
 	import sys
 	import io
@@ -9,7 +10,7 @@ import json
 class Data(object):
 	"""Data Middle class for Redis"""
 	__slots__ = ('hashName','redis','status')
-	def __init__(self,domain="127.0.0.1",secret="",db=0,port=6379,hashName="judge"):
+	def __init__(self,domain=conf.REDIS_HOST,secret=conf.REDIS_SECRET,db=0,port=6379,hashName="judge"):
 		try:
 			self.hashName = hashName
 			self.redis = redis.Redis(host=domain,port=port, db=db,decode_responses=True)

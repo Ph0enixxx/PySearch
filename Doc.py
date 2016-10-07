@@ -8,6 +8,7 @@ import Cut
 from Data import Data
 from SQL import Sql
 import fun
+import conf
 ####################
 
 #不同的词后面加上不同的题号即可
@@ -81,9 +82,9 @@ class Doc(object):
 			return self.data.json_encode(lst[(page-1)*size:page*size])
 		pass
 	def getData(self):
-		s = Sql("127.0.0.1","root","","oj")
+		s = Sql(conf.SQL_HOST,conf.SQL_USER,conf.SQL_PASS,conf.SQL_DB)
 		try:
-			p = [(i[0],Cut.go(i[1]))for i in s.getStringResult("select * from problem")]
+			p = [(i[0],Cut.go(i[1]))for i in s.getStringResult(conf.QUERY_DATA)]
 		#print(p)
 			return p
 		except:
@@ -92,3 +93,4 @@ if __name__ == '__main__':
 	a = Doc()
 	#a.save(a.getData())
 	print(a.get("了"))
+	print(a.getData())
