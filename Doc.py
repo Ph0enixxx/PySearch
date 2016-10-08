@@ -24,31 +24,32 @@ class Doc(object):
 		for i in data_:
 			num  = i[0]
 			data = i[1]
-			fun.msg(num,2)
-			fun.msg(data,2)
+			#fun.msg(num,2)
+			#fun.msg(data,2)
 
 			for x in data:
 				if x != "" and x != " ":
 					#获取json 转换 添加 写回
 					##try catch
-					print(type(x))
+					#print(type(x))
 					#fun.msg(x,1)
-					print(x)
+					#print(x)
 					js = self.data.get(x)
 					fun.msg(js,2)
 					if js == None:
 						l = [num,]
-						fun.msg(l,2)
 						numx = self.data.json_encode(l)
-						fun.msg(numx)
 						self.data.set(x,numx)
 					else:
-						js = list(self.data.json_decode(js))
-						js.append(num)
-						if len(js) >1:
-							js = list(set(js))
-						numx = self.data.json_encode(js)
-						self.data.set(x,numx)
+						try:
+							js = list(self.data.json_decode(str(js)))
+							js.append(num)
+							if len(js) >1:
+								js = list(set(js))
+							numx = self.data.json_encode(js)
+							self.data.set(x,numx)
+						except:
+							fun.msg(str(js) + "出了点毛病",1)
 		#分词
 			#判断空
 		#每个都提交数据库
@@ -91,6 +92,6 @@ class Doc(object):
 			fun.msg("获取数据失败",1)
 if __name__ == '__main__':
 	a = Doc()
-	#a.save(a.getData())
-	print(a.get("了"))
-	print(a.getData())
+	a.save(a.getData())
+	# print(a.get("了"))
+	# print(a.getData())

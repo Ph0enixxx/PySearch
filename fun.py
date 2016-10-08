@@ -1,3 +1,4 @@
+import conf
 def msg(msg,t=0):
 	if conf.DEBUG == False:
 		return
